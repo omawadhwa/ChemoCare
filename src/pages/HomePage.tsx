@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Brain, Calendar, Book, Users, Bell, Menu, X, Sparkles, Gamepad2 } from 'lucide-react';
+import { Brain, Calendar, Book, Users, Bell, Menu, X, Sparkles, Gamepad2, Lightbulb } from 'lucide-react';
 
 function HomePage() {
   const navigate = useNavigate();
@@ -93,16 +93,21 @@ function HomePage() {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             
             {/* Memory Exercises */}
-            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div 
+              onClick={() => navigate('/mind-soothing')}
+              className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+            >
               <div className="flex items-center mb-4">
                 <Brain className="h-6 w-6 text-sage-600" />
-                <h3 className="ml-2 text-lg font-medium text-sage-900">Memory Exercises</h3>
+                <h3 className="ml-2 text-lg font-medium text-sage-900">Mind Soothing Exercises & Activities</h3>
               </div>
-              <p className="text-warm-600">Daily cognitive exercises designed specifically for chemobrain recovery.</p>
+              <p className="text-warm-600">Daily cognitive exercises and activities designed specifically for chemobrain recovery.</p>
             </div>
 
             {/* AI Assistant */}
-            <div className="bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div 
+              onClick={() => navigate('/assistant')}
+              className="bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer">
               <div className="flex items-center mb-4">
                 <Sparkles className="h-6 w-6 text-white" />
                 <h3 className="ml-2 text-lg font-medium text-white">AI Assistant</h3>
@@ -141,12 +146,27 @@ function HomePage() {
             </div>
 
             {/* Support Groups */}
-            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div 
+              onClick={() => navigate('/community')}
+              className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+            >
               <div className="flex items-center mb-4">
                 <Users className="h-6 w-6 text-sage-600" />
-                <h3 className="ml-2 text-lg font-medium text-sage-900">Support Groups</h3>
+                <h3 className="ml-2 text-lg font-medium text-sage-900">ChemoCare Community</h3>
               </div>
               <p className="text-warm-600">Connect with others who understand your journey.</p>
+            </div>
+
+            {/* FAQs */}
+            <div 
+              onClick={() => navigate('/faqs')}
+              className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+            >
+              <div className="flex items-center mb-4">
+                <Lightbulb className="h-6 w-6 text-sage-600" />
+                <h3 className="ml-2 text-lg font-medium text-sage-900">Cancer FAQs</h3>
+              </div>
+              <p className="text-warm-600">Find answers to commonly asked questions about cancer and treatment.</p>
             </div>
 
             {/* Reminders */}
