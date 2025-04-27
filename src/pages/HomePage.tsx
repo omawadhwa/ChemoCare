@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Brain, Calendar, Book, Users, Bell, Menu, X, Sparkles, Gamepad2, Lightbulb } from 'lucide-react';
+import { Brain, Calendar, Book, Users, Bell, Menu, X, Sparkles, Gamepad2, Lightbulb, Info, AlertTriangle } from 'lucide-react';
 
 function HomePage() {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showDisclaimer, setShowDisclaimer] = useState(false);
 
   return (
     <div className="min-h-screen bg-sage-50">
@@ -20,11 +21,26 @@ function HomePage() {
         <a href="#tools" className="text-sage-600 hover:text-sage-800">Tools</a>
         <a href="#resources" className="text-sage-600 hover:text-sage-800">Resources</a>
         <a href="#community" className="text-sage-600 hover:text-sage-800">Community</a>
+        <button 
+          onClick={() => setShowDisclaimer(true)}
+          className="text-sage-600 hover:text-sage-800 flex items-center"
+          aria-label="Medical Disclaimer"
+        >
+          <Info className="h-5 w-5 mr-1" />
+          <span>Disclaimer</span>
+        </button>
         <button className="bg-sage-600 text-white px-4 py-2 rounded-md hover:bg-sage-700">
           Get Support
         </button>
       </div>
       <div className="md:hidden">
+        <button
+          onClick={() => setShowDisclaimer(true)}
+          className="p-2 mr-2 text-sage-600 hover:text-sage-800"
+          aria-label="Medical Disclaimer"
+        >
+          <Info className="h-5 w-5" />
+        </button>
         <button onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? (
             <X className="h-6 w-6 text-sage-600" />
@@ -48,6 +64,71 @@ function HomePage() {
     </div>
   )}
 </nav>
+
+      {/* Disclaimer Modal */}
+      {showDisclaimer && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex items-center">
+                  <AlertTriangle className="h-6 w-6 text-amber-500 mr-2" />
+                  <h2 className="text-xl font-bold text-sage-900">Medical Disclaimer</h2>
+                </div>
+                <button 
+                  onClick={() => setShowDisclaimer(false)}
+                  className="text-gray-400 hover:text-gray-500"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+              </div>
+              
+              <div className="prose prose-sage max-w-none">
+                <p className="font-semibold text-sage-800">
+                  The information provided by ChemoCare is not a substitute for professional medical advice, diagnosis, or treatment.
+                </p>
+                
+                <p className="mt-4">
+                  The content available through this application, including but not limited to text, graphics, images, and other material, is for informational and educational purposes only. It is not intended to be a substitute for professional medical advice, diagnosis, or treatment.
+                </p>
+                
+                <p className="mt-3">
+                  Always seek the advice of your physician or other qualified healthcare provider with any questions you may have regarding a medical condition or treatment and before undertaking a new healthcare regimen. Never disregard professional medical advice or delay in seeking it because of something you have read on the ChemoCare platform.
+                </p>
+                
+                <h3 className="text-lg font-semibold mt-6 text-sage-800">Important Considerations:</h3>
+                
+                <ul className="list-disc pl-5 space-y-2 mt-2">
+                  <li>ChemoCare does not recommend or endorse any specific tests, physicians, products, procedures, opinions, or other information that may be mentioned on our platform.</li>
+                  <li>Reliance on any information provided by ChemoCare, its employees, others appearing on the platform at the invitation of ChemoCare, or other visitors to the platform is solely at your own risk.</li>
+                  <li>The platform may contain health or medical-related materials that are sexually explicit or otherwise offensive. ChemoCare, its licensors, and its suppliers have no control over and accept no responsibility for such materials.</li>
+                  <li>The cognitive exercises, games, and activities provided by ChemoCare are designed as complementary tools and should be used alongside professional medical treatment, not as replacements.</li>
+                  <li>In case of a medical emergency, call your doctor or emergency services immediately.</li>
+                </ul>
+                
+                <h3 className="text-lg font-semibold mt-6 text-sage-800">Use of Content:</h3>
+                
+                <p className="mt-2">
+                  The information provided by ChemoCare is compiled from various sources. While we strive to provide accurate and up-to-date information, we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any information on the platform.
+                </p>
+                
+                <p className="mt-3 italic text-sage-700">
+                  By using ChemoCare, you acknowledge that you have read this disclaimer, understand it, and agree to be bound by it.
+                </p>
+              </div>
+              
+              <div className="mt-6 text-center">
+                <button
+                  onClick={() => setShowDisclaimer(false)}
+                  className="px-4 py-2 bg-sage-600 text-white rounded-md hover:bg-sage-700 transition-colors"
+                >
+                  I Understand
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Hero Section */}
 <div className="relative bg-white overflow-hidden">
@@ -128,7 +209,10 @@ function HomePage() {
             </div>
 
             {/* Symptom Tracker */}
-            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div 
+              onClick={() => navigate('/symptom-tracker')}
+              className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+            >
               <div className="flex items-center mb-4">
                 <Calendar className="h-6 w-6 text-sage-600" />
                 <h3 className="ml-2 text-lg font-medium text-sage-900">Symptom Tracker</h3>
@@ -137,7 +221,10 @@ function HomePage() {
             </div>
 
             {/* Resource Library */}
-            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div 
+              onClick={() => navigate('/resource-library')}
+              className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+            >
               <div className="flex items-center mb-4">
                 <Book className="h-6 w-6 text-sage-600" />
                 <h3 className="ml-2 text-lg font-medium text-sage-900">Resource Library</h3>
@@ -170,7 +257,10 @@ function HomePage() {
             </div>
 
             {/* Reminders */}
-            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div 
+              onClick={() => navigate('/reminders')}
+              className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+            >
               <div className="flex items-center mb-4">
                 <Bell className="h-6 w-6 text-sage-600" />
                 <h3 className="ml-2 text-lg font-medium text-sage-900">Daily Reminders</h3>

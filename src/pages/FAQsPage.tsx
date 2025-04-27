@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Brain, ArrowLeft, ChevronDown, ChevronUp, Lightbulb } from 'lucide-react';
+import { Brain, ArrowLeft, ChevronDown, ChevronUp, Lightbulb, Search, X } from 'lucide-react';
 
 // FAQ interface
 interface FAQItem {
@@ -12,6 +12,8 @@ const FAQsPage: React.FC = () => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const faqs: FAQItem[] = [
     {
@@ -103,6 +105,36 @@ const FAQsPage: React.FC = () => {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
 
+  const categories = [
+    'General',
+    'Causes',
+    'Prevention',
+    'Symptoms',
+    'Diagnosis',
+    'Treatment',
+    'Side Effects',
+    'Emotional Support'
+  ];
+
+  const handleCategoryChange = (category: string | null) => {
+    setActiveCategory(category);
+    setExpandedIndex(null);
+  };
+
+  const clearSearch = () => {
+    setSearchQuery('');
+  };
+
+  const filteredFAQs = allFaqs.filter(faq => {
+    const matchesSearch = searchQuery === '' || 
+      faq.question.toLowerCase().includes(searchQuery.toLowerCase()) || 
+      faq.answer.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    const matchesCategory = activeCategory === null || faq.category === activeCategory;
+    
+    return matchesSearch && matchesCategory;
+  });
+
   return (
     <div className="min-h-screen bg-sage-50">
       {/* Navigation */}
@@ -147,7 +179,7 @@ const FAQsPage: React.FC = () => {
       <div className="py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
-            {allFaqs.map((faq, index) => (
+            {filteredFAQs.map((faq, index) => (
               <div key={index} className="border-b border-gray-200 last:border-b-0">
                 <button
                   className="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
