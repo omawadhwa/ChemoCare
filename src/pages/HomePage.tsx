@@ -146,7 +146,7 @@ function HomePage() {
             </p>
             <div className="mt-12 sm:mt-12 sm:flex sm:justify-center lg:mt-24 lg:justify-start">
               <button
-                onClick={() => navigate('/meeting')}
+                onClick={() => navigate('/assistanttrial')}
                 className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-sage-600 hover:bg-sage-700 md:py-4 md:text-lg md:px-10"
               >
                 Get Started

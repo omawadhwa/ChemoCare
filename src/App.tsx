@@ -34,6 +34,7 @@ import FAQsPage from './pages/FAQsPage';
 import SymptomTrackerPage from './pages/SymptomTrackerPage';
 import RemindersPage from './pages/RemindersPage';
 import ResourceLibraryPage from './pages/ResourceLibraryPage';
+import AssistantPageT from './pages/AssitantPageT';
 
 // ScrollToTop component to handle scrolling to top on navigation
 function ScrollToTop() {
@@ -56,6 +57,7 @@ function App() {
         <Route path="/games" element={<GamesPage />} />
         <Route path="/mind-soothing" element={<MindSoothingPage />} />
         <Route path="/assistant" element={<AssistantPage />} />
+        <Route path="/assistanttrial" element={<AssistantPageT />} />
         <Route path="/community" element={<CommunityPage />} />
         <Route path="/faqs" element={<FAQsPage />} />
         <Route path="/symptom-tracker" element={<SymptomTrackerPage />} />
